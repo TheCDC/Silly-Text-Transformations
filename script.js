@@ -64,6 +64,28 @@ var vowels = new Set("aeiouy");
 var consonants = new Set("bcdfghjklmnpqrstvwxz");
 var alphas = new Set([...vowels, ...consonants]);
 
+function first_sound_group(s) {
+    var state = 0;
+    var consonantIdx = 0;
+    for (var i = 0; i < s.length; i++) {
+        if (state === 0) {
+            if (vowels.has(s.toLowerCase()[i])) {
+                state = 1;
+            }
+        } else if (state === 1) {
+            if (consonants.has(s[i].toLowerCase())) {
+                consonantIdx = i;
+                return s.slice(0, consonantIdx + 1);
+                break;
+            }
+        }
+
+        // statement
+    }
+    return s;
+}
+
+
 function covfefifyWord(s) {
     var xlat = {
         h: "h",
@@ -89,26 +111,6 @@ function covfefifyWord(s) {
     };
     // console.log(vowels);
     // console.log(consonants);
-    function first_sound_group(s) {
-        var state = 0;
-        var consonantIdx = 0;
-        for (var i = 0; i < s.length; i++) {
-            if (state === 0) {
-                if (vowels.has(s.toLowerCase()[i])) {
-                    state = 1;
-                }
-            } else if (state === 1) {
-                if (consonants.has(s[i].toLowerCase())) {
-                    consonantIdx = i;
-                    return s.slice(0, consonantIdx + 1);
-                    break;
-                }
-            }
-
-            // statement
-        }
-        return s;
-    }
 
     var soundGroup = first_sound_group(s);
     var startIndex = soundGroup.length;
@@ -192,7 +194,7 @@ class TransformationSelector {
         }
         return out;
     }
-    registerDelegate(func){
+    registerDelegate(func) {
         this.delegate = func;
     }
     render(root) {
