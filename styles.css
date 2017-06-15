@@ -1,14 +1,39 @@
 .halfwidth {
-	width: 50vw;
-	height: 100vw;
+    width: 50vw;
+    height: 100vw;
 }
-.fullwide{
-	width: 100%;
+
+.fullwide {
+    width: 100%;
 }
-.screenwidth{
-	width: 100vw;
+
+.screenwidth {
+    width: 95vw;
 }
 
 .screenheight {
-	height: 100vh;
+    height: 100vh;
+}
+
+.fullHeight {
+	height: 100%;
+}
+
+#managerView table {
+    margin-left: auto;
+    margin-right: auto;
+}
+
+#managerView {
+    height: 30vh;
+}
+
+
+#inputHalf table tr td{
+	height: 50vh;
+}
+
+
+textarea {
+	height: 100%;
 }
