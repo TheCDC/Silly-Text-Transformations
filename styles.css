@@ -1,0 +1,14 @@
+.halfwidth {
+	width: 50vw;
+	height: 100vw;
+}
+.fullwide{
+	width: 100%;
+}
+.screenwidth{
+	width: 100vw;
+}
+
+.screenheight {
+	height: 100vh;
+}
