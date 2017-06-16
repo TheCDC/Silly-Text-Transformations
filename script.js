@@ -319,5 +319,3 @@ function main() {
     processInput();
 }
 main();
-// inputArea.value = "";
-// mainLoop();

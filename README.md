@@ -3,4 +3,4 @@ This project was inspired by [this code golf](https://codegolf.stackexchange.com
 
 I originally wanted to implement just the covfefefication algorithm but then of course I had to generalize it.
 
-Anyway, just open up index.html and have fun.
+Try it [here](https://thecdc.github.io/Silly-Text-Transformations/)
