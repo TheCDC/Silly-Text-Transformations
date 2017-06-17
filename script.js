@@ -1,6 +1,12 @@
 var inputArea = document.getElementById("inputArea");
 var outputArea = document.getElementById("outputArea");
 
+function splitWordsAndPunctuation(s) {
+    var wordPattern = /[\w-']+|[^\w]+/g;
+    allWords = s.match(wordPattern);
+    return allWords;
+}
+
 function swapFirstLastLetter(s) {
     function shuffle(array) {
         var currentIndex = array.length,
@@ -34,17 +40,14 @@ function swapFirstLastLetter(s) {
     }
 
     function translateText(text) {
-        var outLines = [];
-        var lines = text.split("\n");
-        for (var i = 0; i < lines.length; i++) {
-            var words = lines[i].split(" ");
-            for (var j = words.length - 1; j >= 0; j--) {
-                words[j] = translateWord(words[j]);
+        var allWords = splitWordsAndPunctuation(s);
+        allWords.forEach(function(element, index) {
+            if (element.length > 0 && alphas.has(element[0].toLowerCase())) {
+
+                allWords[index] = translateWord(element);
             }
-            outLines.push(words.join(" "));
-        }
-        var outText = outLines.join("\n");
-        return outText;
+        });
+        return allWords.join("");
     }
     return translateText(s);
 }
@@ -57,9 +60,6 @@ function reverseString(s) {
     return s.split("").reverse().join("");
 }
 
-function asian(s) {
-    return s.split("l").join("r").split("L").join("R");
-}
 var vowels = new Set("aeiouy");
 var consonants = new Set("bcdfghjklmnpqrstvwxz");
 var alphas = new Set([...vowels, ...consonants]);
@@ -84,7 +84,6 @@ function first_sound_group(s) {
     }
     return s;
 }
-
 
 function covfefifyWord(s) {
     var xlat = {
@@ -125,7 +124,6 @@ function covfefifyWord(s) {
     var rotated = xlat[lastLetter];
     if (rotated == null) {
         return s;
-
     } else {
         return soundGroup + (rotated + v).repeat(2);
     }
@@ -135,26 +133,25 @@ function covfefifyWord(s) {
 
 function covfefify(s) {
     // var wordPattern = /[,.!?;:]|\b[1-9a-z']+\b/ig;
-    var wordPattern = /[\w-']+|[^\w]+/g;
-    allWords = s.match(wordPattern);
+    allWords = splitWordsAndPunctuation(s);
     out = new Array();
     allWords.forEach(function(element, index) {
         if (element.length > 0) {
-
             if (alphas.has(element[0].toLowerCase())) {
-
                 out.push(covfefifyWord(element));
             } else {
-                out.push(element)
+                out.push(element);
             }
-
         }
-
-
     });
     // return JSON.stringify(out);
     return out.join("");
 }
+
+function asian(s) {
+    return s.split("l").join("r").split("L").join("R");
+}
+
 class TransformationSelector {
     constructor() {
         this.nameToFunc = {};
