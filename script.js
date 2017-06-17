@@ -149,6 +149,19 @@ function covfefify(s) {
 }
 
 function asian(s) {
+    var chars = s.split("");
+    chars.forEach(function(element, index) {
+        if (element === "r") {
+            chars[index] = "l";
+        } else if (element === "l") {
+            chars[index] = "r";
+        } else if (element === "R") {
+            chars[index] = "L";
+        } else if (element === "L") {
+            chars[index] = "R";
+        }
+    });
+    return chars.join("");
     return s.split("l").join("r").split("L").join("R");
 }
 
