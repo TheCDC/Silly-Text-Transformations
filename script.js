@@ -162,9 +162,27 @@ function asian(s) {
         }
     });
     return chars.join("");
-    return s.split("l").join("r").split("L").join("R");
 }
 
+
+function vowelCycle(s) {
+    var vsLower = "aeiou";
+    var vsUpper = "AEIOU";
+    var mapping = {};
+    for (var i = 0; i < vsLower.length; i++) {
+        mapping[vsLower[i]] = vsLower[(i + 1) % vsLower.length];
+        mapping[vsUpper[i]] = vsUpper[(i + 1) % vsUpper.length];
+    }
+    var chars = s.split("");
+    chars.forEach(function(element, index) {
+        var next = mapping[element];
+        if (next !== undefined) {
+            chars[index] = next;
+        }
+    });
+    return chars.join("");
+
+}
 class TransformationSelector {
     constructor() {
         this.nameToFunc = {};
@@ -300,6 +318,7 @@ function main() {
     manager.registerTransformation(reverseString, "Reverse");
     manager.registerTransformation(asian, "Far East Stereotype");
     manager.registerTransformation(covfefify, "Covfefify");
+    manager.registerTransformation(vowelCycle, "Vowel Cycle");
     // manager.selectByIndex(0);
     // manager.selectByIndex(1);
     console.log(JSON.stringify(manager));
