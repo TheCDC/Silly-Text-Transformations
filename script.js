@@ -7,32 +7,33 @@ function splitWordsAndPunctuation(s) {
     return allWords;
 }
 
-function swapFirstLastLetter(s) {
-    function shuffle(array) {
-        var currentIndex = array.length,
-            temporaryValue, randomIndex;
+function shuffleArray(array) {
+    var currentIndex = array.length,
+        temporaryValue, randomIndex;
 
-        // While there remain elements to shuffle...
-        while (0 !== currentIndex) {
-            // Pick a remaining element...
-            randomIndex = Math.floor(Math.random() * currentIndex);
-            currentIndex -= 1;
+    // While there remain elements to shuffle...
+    while (0 !== currentIndex) {
+        // Pick a remaining element...
+        randomIndex = Math.floor(Math.random() * currentIndex);
+        currentIndex -= 1;
 
-            // And swap it with the current element.
-            temporaryValue = array[currentIndex];
-            array[currentIndex] = array[randomIndex];
-            array[randomIndex] = temporaryValue;
-        }
-
-        return array;
+        // And swap it with the current element.
+        temporaryValue = array[currentIndex];
+        array[currentIndex] = array[randomIndex];
+        array[randomIndex] = temporaryValue;
     }
+
+    return array;
+}
+
+function swapFirstLastLetter(s) {
 
     function translateWord(word) {
         var a = word.split("");
         if (word.length > 2) {
             var head = a[0];
             var tail = a[a.length - 1];
-            var body = shuffle(a.slice(1, a.length - 1)).join("");
+            var body = shuffleArray(a.slice(1, a.length - 1)).join("");
             return head + body + tail;
         } else {
             return word;
@@ -150,15 +151,16 @@ function covfefify(s) {
 
 function asian(s) {
     var chars = s.split("");
+    var mapping = {
+        "l": "r",
+        "L": "R",
+        "r": "l",
+        "R": "L"
+    }
     chars.forEach(function(element, index) {
-        if (element === "r") {
-            chars[index] = "l";
-        } else if (element === "l") {
-            chars[index] = "r";
-        } else if (element === "R") {
-            chars[index] = "L";
-        } else if (element === "L") {
-            chars[index] = "R";
+        var found = mapping[element];
+        if (found !== undefined) {
+            chars[index] = found;
         }
     });
     return chars.join("");
@@ -166,12 +168,11 @@ function asian(s) {
 
 
 function vowelCycle(s) {
-    var vsLower = "aeiou";
-    var vsUpper = "AEIOU";
+    var vs = shuffleArray("aeiou".split(""));
     var mapping = {};
-    for (var i = 0; i < vsLower.length; i++) {
-        mapping[vsLower[i]] = vsLower[(i + 1) % vsLower.length];
-        mapping[vsUpper[i]] = vsUpper[(i + 1) % vsUpper.length];
+    for (var i = 0; i < vs.length; i++) {
+        mapping[vs[i]] = vs[(i + 1) % vs.length];
+        mapping[vs[i].toUpperCase()] = vs[(i + 1) % vs.length].toUpperCase();
     }
     var chars = s.split("");
     chars.forEach(function(element, index) {
