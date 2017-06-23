@@ -184,6 +184,49 @@ function vowelCycle(s) {
     return chars.join("");
 
 }
+
+function firstConsonantGroupIndex(s) {
+    var letters = [];
+    for (var i = 0; i < s.length; i++) {
+        if (consonants.has(s[i].toLowerCase())) {
+            letters.push(s[i]);
+        } else {
+            break;
+        }
+
+    }
+    return letters.length;
+}
+
+function commonMistake(s) {
+    var tokens = splitWordsAndPunctuation(s);
+    var wordIndices = [];
+    tokens.forEach(function(element, index) {
+        // statements
+        if (alphas.has(element[0].toLowerCase())) {
+            wordIndices.push(index);
+        }
+    });
+    var out = [];
+    for (var i = 0; i < wordIndices.length; i += 2) {
+        if (i + 1 >= wordIndices.length) {
+            out.push(tokens[wordIndices[i]]);
+            break;
+        } else {
+            var w1 = tokens[wordIndices[i]];
+            var w2 = tokens[wordIndices[i + 1]];
+            var i1 = firstConsonantGroupIndex(w1);
+            var i2 = firstConsonantGroupIndex(w2);
+            var word1 = w2.slice(0, i2) + w1.slice(i1, w1.length);
+            var word2 = w1.slice(0, i1) + w2.slice(i2, w2.length);
+            console.log(i + ": " + word1 + "," + word2);
+            tokens[wordIndices[i]] = word1;
+            tokens[wordIndices[i + 1]] = word2;
+        }
+    }
+    return tokens.join("");
+}
+
 class TransformationSelector {
     constructor() {
         this.nameToFunc = {};
@@ -320,6 +363,7 @@ function main() {
     manager.registerTransformation(asian, "Far East Stereotype");
     manager.registerTransformation(covfefify, "Covfefify");
     manager.registerTransformation(vowelCycle, "Vowel Cycle");
+    manager.registerTransformation(commonMistake, "Common Mistake");
     // manager.selectByIndex(0);
     // manager.selectByIndex(1);
     console.log(JSON.stringify(manager));
