@@ -317,6 +317,8 @@ class TransformationSelector {
         var r2 = t2.insertRow();
         var c3 = r2.insertCell();
         var b1 = document.createElement("button");
+        b1.classList.add("btn");
+        b1.classList.add("btn-default");
         b1.innerHTML = ">";
         b1.addEventListener(
             "click",
@@ -330,6 +332,8 @@ class TransformationSelector {
         var r3 = t2.insertRow();
         var c4 = r3.insertCell();
         var b2 = document.createElement("button");
+        b2.classList.add("btn");
+        b2.classList.add("btn-default");
         b2.innerHTML = "<";
         c4.appendChild(b2);
 
