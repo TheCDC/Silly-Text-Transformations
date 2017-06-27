@@ -4,32 +4,41 @@
 <head>
     <meta charset="UTF-8">
     <link rel="stylesheet" type="text/css" href="styles.css">
+     <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
+    <!-- jQuery library -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+    <!-- Latest compiled JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script> 
 </head>
 
 <body>
-    <p>
-        Select your text transformations here.
-    </p>
-    <div id="managerViewContainer">
-        <div id="managerView">
+    <div class="fullHeight  ">
+        <p>
+            Select your text transformations here.
+        </p>
+        <div id="managerViewContainer">
+            <div id="managerView">
+            </div>
         </div>
+        <p>
+            Output Down here!
+        </p>
+        <div class="container fullHeight fullwide">
+            <div id="inputHalf" class="row ">
+                <div class="col col-md-6">
+                    <textarea class="fullwide fullHeight" id="inputArea" placeholder="Paste your text here!"></textarea>
+                </div>
+                <div class="col col-md-6">
+                    <textarea class="fullwide fullHeight" id="outputArea" placeholder="See the results here!"></textarea>
+                </div>
+                </table>
+            </div>
+        </div>
+        <script src="script.js"></script>
     </div>
-    <p>
-        Output Down here!
-    </p>
-    <div id="inputHalf">
-        <table class="screenwidth">
-            <tr>
-                <td>
-                    <textarea class="fullwide fullHeight" id="inputArea">Paste your text here!</textarea>
-                </td>
-                <td>
-                    <textarea class="fullwide fullHeight" id="outputArea"></textarea>
-                </td>
-            </tr>
-        </table>
-    </div>
-    <script src="script.js"></script>
 </body>
 
 </html>
